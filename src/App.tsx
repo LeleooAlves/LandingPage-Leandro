@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback, FormEvent } from 'react';
 import { Building2, Phone, Mail, Facebook, Instagram, Linkedin as LinkedIn, FileText, Globe2, Clock, MessageCircle, ExternalLink, Menu, X, FileDown } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 
 // Configuração necessária para o react-pdf
 // pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
@@ -8,6 +7,7 @@ import emailjs from '@emailjs/browser';
 interface ClassificationFormData {
   fullName: string;
   email: string;
+  whatsapp: string;
   description: string;
   function: string;
   specificUse?: string;
@@ -29,6 +29,7 @@ function App() {
   const [formData, setFormData] = useState<ClassificationFormData>({
     fullName: '',
     email: '',
+    whatsapp: '',
     description: '',
     function: '',
     specificUse: '',
@@ -41,6 +42,19 @@ function App() {
     type: 'success' | 'error' | null;
     message: string;
   }>({ type: null, message: '' });
+
+  const formatWhatsApp = (value: string) => {
+    const numbers = value.replace(/\D/g, '');
+    if (numbers.length <= 11) {
+      return numbers.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    }
+    return value;
+  };
+
+  const handleWhatsAppChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedValue = formatWhatsApp(e.target.value);
+    setFormData({ ...formData, whatsapp: formattedValue });
+  };
 
   const handleScroll = useCallback(() => {
     const currentScrollY = window.scrollY;
@@ -105,47 +119,56 @@ function App() {
     setSubmitStatus({ type: null, message: '' });
 
     try {
-      emailjs.init("ui672cVr6mo6L8403");
+      const formDataToSend = new FormData();
+      formDataToSend.append('Nome Completo', formData.fullName);
+      formDataToSend.append('Email', formData.email);
+      formDataToSend.append('WhatsApp', formData.whatsapp);
+      formDataToSend.append('Descrição Detalhada', formData.description);
+      formDataToSend.append('Função do Produto', formData.function);
+      formDataToSend.append('Uso Específico', formData.specificUse || 'Não informado');
+      formDataToSend.append('Material Constitutivo', formData.material);
+      formDataToSend.append('Função Principal', formData.mainFunction || 'Não informado');
+      formDataToSend.append('Especificações Elétricas', formData.electricalSpecs || 'Não informado');
 
-      await emailjs.send(
-        "service_3ne9qyd",
-        "template_wtxkfcd",
-        {
-          from_name: formData.fullName,
-          from_email: formData.email,
-          to_email: "leandrobonuzzi@gmail.com",
-          description: formData.description,
-          product_function: formData.function,
-          specific_use: formData.specificUse || 'Não informado',
-          material: formData.material,
-          main_function: formData.mainFunction || 'Não informado',
-          electrical_specs: formData.electricalSpecs || 'Não informado'
+      const response = await fetch('https://formspree.io/f/xgvajvbk', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          'Accept': 'application/json'
         }
-      );
-
-      setSubmitStatus({
-        type: 'success',
-        message: 'Sua solicitação foi enviada com sucesso!'
       });
 
-      setTimeout(() => {
-        setFormData({
-          fullName: '',
-          email: '',
-          description: '',
-          function: '',
-          specificUse: '',
-          material: '',
-          mainFunction: '',
-          electricalSpecs: ''
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Sua solicitação foi enviada com sucesso! Em breve entraremos em contato.'
         });
-        setShowClassificationForm(false);
-        setSubmitStatus({ type: null, message: '' });
-      }, 3000);
+
+        setTimeout(() => {
+          setFormData({
+            fullName: '',
+            email: '',
+            whatsapp: '',
+            description: '',
+            function: '',
+            specificUse: '',
+            material: '',
+            mainFunction: '',
+            electricalSpecs: ''
+          });
+          setShowClassificationForm(false);
+          setSubmitStatus({ type: null, message: '' });
+        }, 3000);
+      } else {
+        throw new Error('Erro ao enviar o formulário');
+      }
     } catch (error) {
+      console.error('Erro completo:', error);
       setSubmitStatus({
         type: 'error',
-        message: 'Erro ao enviar sua solicitação. Por favor, tente novamente.'
+        message: error instanceof Error 
+          ? `Erro ao enviar: ${error.message}`
+          : 'Erro ao enviar sua solicitação. Por favor, tente novamente mais tarde ou entre em contato diretamente.'
       });
     } finally {
       setIsSubmitting(false);
@@ -487,6 +510,22 @@ function App() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="whatsapp" className="block text-sm font-medium text-gray-700 mb-1">
+                      Número de WhatsApp *
+                    </label>
+                    <input
+                      type="tel"
+                      id="whatsapp"
+                      required
+                      value={formData.whatsapp}
+                      onChange={handleWhatsAppChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="(00) 00000-0000"
+                      maxLength={15}
                     />
                   </div>
 
