@@ -1,0 +1,293 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply antialiased;
+  background-image: url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.85);
+  z-index: -1;
+}
+
+/* Smooth transition for fixed elements */
+.fixed {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Header container styles */
+.header-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px; /* Increased from 60px to 80px */
+  background: rgb(255, 255, 255);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+}
+
+/* Mobile menu styles */
+.mobile-menu {
+  background: rgb(255, 255, 255);
+  box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-nav-link {
+  @apply text-lg text-gray-600 hover:text-blue-600 py-3 px-4 border-b border-gray-100 
+         flex items-center transition-all duration-300 hover:bg-blue-50;
+}
+
+/* Pricing table styles */
+.pricing-table {
+  @apply w-full border-collapse;
+}
+
+.pricing-table th,
+.pricing-table td {
+  @apply border border-gray-300 px-4 py-2 text-center;
+}
+
+.pricing-table th {
+  @apply bg-blue-600 text-white font-semibold;
+}
+
+.pricing-table tr:nth-child(even) {
+  @apply bg-white/50;
+}
+
+.pricing-table tr:nth-child(odd) {
+  @apply bg-white/30;
+}
+
+/* Parallax effect */
+section {
+  position: relative;
+  will-change: transform;
+}
+
+/* Enhanced initial animation on page load */
+@keyframes initialFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  20% {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced fade in animation for scroll reveals */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  20% {
+    opacity: 0.2;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Initial page load animations with enhanced timing */
+.hero-content {
+  opacity: 0;
+  animation: initialFadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Enhanced stagger children animations */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stagger-children > *.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Navigation link effects */
+.nav-link {
+  position: relative;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.nav-link:hover {
+  background-color: rgba(37, 99, 235, 0.1);
+  transform: translateY(-2px);
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover::before {
+  border-color: #2563eb;
+  transform: scale(1.05);
+}
+
+/* Enhanced scroll reveal with better timing */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Add these new styles for the modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  max-width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Add smooth scrolling for the modal content */
+.modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+}
+
+/* Mobile navigation adjustments */
+@media (max-width: 768px) {
+  .nav-link {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-container {
+    padding-top: 0.5rem;
+  }
+
+  /* Smaller dollar widget for mobile */
+  .dollar-widget {
+    font-size: 0.875rem;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .dollar-widget .rate {
+    font-size: 1.125rem;
+  }
+
+  /* Adjust section padding for mobile */
+  section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  /* Adjust hero section for mobile */
+  .hero-content {
+    padding-top: 1rem;
+  }
+
+  /* Improve mobile menu animation */
+  .mobile-menu-enter {
+    transform: translateX(100%);
+  }
+
+  .mobile-menu-enter-active {
+    transform: translateX(0%);
+    transition: transform 300ms ease-in-out;
+  }
+
+  .mobile-menu-exit {
+    transform: translateX(0%);
+  }
+
+  .mobile-menu-exit-active {
+    transform: translateX(100%);
+    transition: transform 300ms ease-in-out;
+  }
+
+  input, textarea {
+    font-size: 16px !important; /* Prevents zoom on mobile devices */
+  }
+  
+  .modal-content {
+    padding: 1rem;
+    width: 95%;
+  }
+
+  /* Adjust mobile menu position for taller header */
+  .mobile-menu {
+    top: 80px !important; /* Match header height */
+  }
+}
