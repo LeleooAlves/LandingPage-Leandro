@@ -23,8 +23,8 @@ function App() {
   const [showClassificationForm, setShowClassificationForm] = useState(false);
   const [showPricesPopup, setShowPricesPopup] = useState(false);
   const [showPdfViewer, setShowPdfViewer] = useState(false);
-  const [numPages, setNumPages] = useState<number | null>(null);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [] = useState<number | null>(null);
+  const [] = useState(1);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState<ClassificationFormData>({
     fullName: '',
@@ -95,36 +95,8 @@ function App() {
     document.body.style.overflow = 'auto';
   };
 
-  const openNeshPdf = async () => {
-    try {
-      const pdfUrl = '/Nesh 2022 - REGRAS INTERPRETATIVAS DO SISTEMA HARMONIZADO.pdf';
-      const fileName = 'REGRAS INTERPRETATIVAS DO SISTEMA HARMONIZADO.pdf';
-
-      const response = await fetch(pdfUrl);
-      if (!response.ok) {
-        throw new Error('Erro ao carregar o PDF');
-      }
-
-      const blob = await response.blob();
-      const file = new File([blob], fileName, { type: 'application/pdf' });
-      const blobUrl = window.URL.createObjectURL(file);
-
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-
-      // Limpa a URL do blob após um curto delay
-      setTimeout(() => {
-        window.URL.revokeObjectURL(blobUrl);
-      }, 100);
-    } catch (error) {
-      console.error('Erro ao abrir o PDF:', error);
-      alert('Erro ao abrir o PDF. Por favor, tente novamente.');
-    }
+  const openNeshPdf = () => {
+    window.open('/Nesh 2022 - REGRAS INTERPRETATIVAS DO SISTEMA HARMONIZADO.pdf', '_blank');
   };
 
   const handleFormSubmit = async (e: FormEvent) => {
@@ -234,42 +206,42 @@ function App() {
         <div
           className={`fixed inset-0 bg-white mobile-menu transition-transform duration-300 ease-in-out transform ${
             isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          } md:hidden`}
-          style={{ top: '80px' }}
+          } md:hidden z-50`}
+          style={{ top: '64px' }}
         >
           <div className="container mx-auto px-4 py-6">
             <nav className="flex flex-col space-y-4">
               <a
                 href="#servicos"
-                className="mobile-nav-link"
+                className="mobile-nav-link text-base py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
                 onClick={closeMobileMenu}
               >
                 Serviços
               </a>
               <a
                 href="#portfolio"
-                className="mobile-nav-link"
+                className="mobile-nav-link text-base py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
                 onClick={closeMobileMenu}
               >
                 Portfólio
               </a>
               <a
                 href="#faq"
-                className="mobile-nav-link"
+                className="mobile-nav-link text-base py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
                 onClick={closeMobileMenu}
               >
                 FAQ
               </a>
               <a
                 href="#apoio"
-                className="mobile-nav-link"
+                className="mobile-nav-link text-base py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
                 onClick={closeMobileMenu}
               >
                 Links de Apoio
               </a>
               <a
                 href="#contato"
-                className="mobile-nav-link"
+                className="mobile-nav-link text-base py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
                 onClick={closeMobileMenu}
               >
                 Contato
@@ -279,7 +251,7 @@ function App() {
                   setShowClassificationForm(true);
                   closeMobileMenu();
                 }}
-                className="mobile-nav-link text-left"
+                className="mobile-nav-link text-base py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors text-left"
               >
                 Solicitar classificação
               </button>
@@ -289,61 +261,61 @@ function App() {
       </div>
 
       {/* Hero Section */}
-      <section className="pt-24 md:pt-32 pb-20 px-4 relative overflow-hidden">
+      <section className="pt-16 md:pt-32 pb-12 md:pb-20 px-4 relative overflow-hidden">
         <div className="container mx-auto text-center hero-content">
-          <h1 className="text-4xl md:text-7xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold text-gray-900 mb-2">
             Consultor Aduaneiro
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             Empresário individual na área de comércio exterior com mais de 15 anos
             de experiência no mercado, oferecendo consultoria aduaneira na área de importação, 
             com foco em classificação fiscal de mercadorias (NCM) e desenvolvimento, revisão e gerenciamento de produtos em conformidade ao novo catalogo de produtos da Receita Federal, Duimp.
           </p>
           <button
             onClick={openNeshPdf}
-            className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-transform duration-200"
+            className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-transform duration-200 w-full sm:w-auto"
           >
-            <FileDown className="h-5 w-5" />
-            REGRAS INTERPRETATIVAS DO SISTEMA HARMONIZADO
+            <FileDown className="h-4 w-4 sm:h-5 sm:w-5" />
+            <span className="text-sm sm:text-base">REGRAS INTERPRETATIVAS DO SISTEMA HARMONIZADO</span>
           </button>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="servicos" className="py-20 md:py-24 relative overflow-hidden">
+      <section id="servicos" className="py-16 md:py-24 relative overflow-hidden">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-12 reveal">Nossos Serviços</h2>
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8 stagger-children">
-            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
-              <div className="mb-4"><FileText className="h-8 w-8 text-blue-600" /></div>
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 reveal">Nossos Serviços</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 stagger-children">
+            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
+              <div className="mb-4"><FileText className="h-6 w-6 md:h-8 md:w-8 text-blue-600" /></div>
               <h3 className="text-lg md:text-xl font-semibold mb-2">Classificação Fiscal</h3>
-              <p className="text-gray-600 mb-4">Análise e determinação precisa do NCM/SH para suas mercadorias, garantindo conformidade e otimização tributária.</p>
+              <p className="text-gray-600 mb-4 text-sm md:text-base">Análise e determinação precisa do NCM/SH para suas mercadorias, garantindo conformidade e otimização tributária.</p>
               <div className="flex flex-col sm:flex-row gap-2">
                 <button
                   onClick={() => setShowPricesPopup(true)}
-                  className="flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto"
+                  className="flex items-center justify-center gap-2 bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto text-sm"
                 >
                   <FileText className="h-4 w-4" />
                   Preços
                 </button>
                 <button
                   onClick={() => setShowClassificationForm(true)}
-                  className="flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto"
+                  className="flex items-center justify-center gap-2 bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto text-sm"
                 >
                   <FileText className="h-4 w-4" />
                   Solicitar Classificação
                 </button>
               </div>
             </div>
-            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
-              <div className="mb-4"><Globe2 className="h-8 w-8 text-blue-600" /></div>
+            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
+              <div className="mb-4"><Globe2 className="h-6 w-6 md:h-8 md:w-8 text-blue-600" /></div>
               <h3 className="text-lg md:text-xl font-semibold mb-2">Desenvolvimento, adequação e gestão</h3>
-              <p className="text-gray-600">Descrição de mercadorias importadas para o novo catálogo de produtos da Receita Federal, em conformidade ao novo processo de importação - (Duimp).</p>
+              <p className="text-gray-600 text-sm md:text-base">Descrição de mercadorias importadas para o novo catálogo de produtos da Receita Federal, em conformidade ao novo processo de importação - (Duimp).</p>
             </div>
-            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
-              <div className="mb-4"><Clock className="h-8 w-8 text-blue-600" /></div>
+            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
+              <div className="mb-4"><Clock className="h-6 w-6 md:h-8 md:w-8 text-blue-600" /></div>
               <h3 className="text-lg md:text-xl font-semibold mb-2">Consultoria em Importação</h3>
-              <p className="text-gray-600">Orientação especializada em processos de importação, análise de custos e viabilidade operacional.</p>
+              <p className="text-gray-600 text-sm md:text-base">Orientação especializada em processos de importação, análise de custos e viabilidade operacional.</p>
             </div>
           </div>
         </div>
@@ -617,36 +589,36 @@ function App() {
       )}
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="py-20 relative overflow-hidden">
+      <section id="portfolio" className="py-16 md:py-24 relative overflow-hidden">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-12 reveal">Casos de Sucesso</h2>
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-12 stagger-children">
-            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 reveal">Casos de Sucesso</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12 stagger-children">
+            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
               <img 
                 src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800"
                 alt="Container terminal"
-                className="w-full h-48 object-cover rounded-lg mb-4"
+                className="w-full h-40 md:h-48 object-cover rounded-lg mb-4"
               />
               <h3 className="text-lg md:text-xl font-semibold mb-2">Otimização de Processos Aduaneiros</h3>
-              <p className="text-gray-600">Redução de 40% no tempo de liberação de cargas através de análise preventiva e gestão eficiente.</p>
+              <p className="text-gray-600 text-sm md:text-base">Redução de 40% no tempo de liberação de cargas através de análise preventiva e gestão eficiente.</p>
             </div>
-            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
+            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
               <img 
                 src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800"
                 alt="Documentos e análise"
-                className="w-full h-48 object-cover rounded-lg mb-4"
+                className="w-full h-40 md:h-48 object-cover rounded-lg mb-4"
               />
               <h3 className="text-lg md:text-xl font-semibold mb-2">Economia em Classificação Fiscal</h3>
-              <p className="text-gray-600">Economia significativa em impostos através da correta classificação fiscal de produtos para grandes empresas multinacionais.</p>
+              <p className="text-gray-600 text-sm md:text-base">Economia significativa em impostos através da correta classificação fiscal de produtos para grandes empresas multinacionais.</p>
             </div>
-            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
+            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
               <img 
                 src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800"
                 alt="Processo Ex-Tarifário"
-                className="w-full h-48 object-cover rounded-lg mb-4"
+                className="w-full h-40 md:h-48 object-cover rounded-lg mb-4"
               />
               <h3 className="text-lg md:text-xl font-semibold mb-2">Consultoria para Ex-Tarifário</h3>
-              <p className="text-gray-600">Consultoria para redução de impostos na importação via Ex-Tarifário, com gestão completa do processo</p>
+              <p className="text-gray-600 text-sm md:text-base">Consultoria para redução de impostos na importação via Ex-Tarifário, com gestão completa do processo</p>
             </div>
           </div>
           <div className="text-center space-y-4">
@@ -669,28 +641,28 @@ function App() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 relative overflow-hidden">
+      <section id="faq" className="py-16 md:py-24 relative overflow-hidden">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-12 reveal">Perguntas Frequentes</h2>
-          <div className="max-w-3xl mx-auto space-y-6 stagger-children">
-            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg reveal">
-              <h3 className="text-lg md:text-xl font-semibold mb-2">Como é feita a classificação fiscal de mercadorias?</h3>
-              <p className="text-gray-600">A classificação é realizada através de análise detalhada das características do produto, 
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 reveal">Perguntas Frequentes</h2>
+          <div className="max-w-3xl mx-auto space-y-4 md:space-y-6 stagger-children">
+            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg reveal">
+              <h3 className="text-base md:text-lg lg:text-xl font-semibold mb-2">Como é feita a classificação fiscal de mercadorias?</h3>
+              <p className="text-gray-600 text-sm md:text-base">A classificação é realizada através de análise detalhada das características do produto, 
                 consulta à TEC (Tarifa Externa Comum) e aplicação das Regras Gerais de Interpretação do Sistema Harmonizado.</p>
             </div>
-            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg reveal">
-              <h3 className="text-lg md:text-xl font-semibold mb-2">Qual o tempo médio para desembaraço aduaneiro?</h3>
-              <p className="text-gray-600">O prazo varia conforme o canal de parametrização (verde, amarelo, vermelho ou cinza), 
+            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg reveal">
+              <h3 className="text-base md:text-lg lg:text-xl font-semibold mb-2">Qual o tempo médio para desembaraço aduaneiro?</h3>
+              <p className="text-gray-600 text-sm md:text-base">O prazo varia conforme o canal de parametrização (verde, amarelo, vermelho ou cinza), 
                 mas com nossa gestão eficiente, conseguimos reduzir significativamente os tempos médios de liberação.</p>
             </div>
-            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg reveal">
-              <h3 className="text-lg md:text-xl font-semibold mb-2">Como posso reduzir custos na importação?</h3>
-              <p className="text-gray-600">Através de análise prévia da classificação fiscal, planejamento tributário adequado, 
+            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg reveal">
+              <h3 className="text-base md:text-lg lg:text-xl font-semibold mb-2">Como posso reduzir custos na importação?</h3>
+              <p className="text-gray-600 text-sm md:text-base">Através de análise prévia da classificação fiscal, planejamento tributário adequado, 
                 e gestão eficiente do processo de desembaraço, evitando multas e atrasos.</p>
             </div>
-            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg reveal">
-              <h3 className="text-lg md:text-xl font-semibold mb-2">Quais documentos são necessários para iniciar uma importação?</h3>
-              <p className="text-gray-600">Os principais documentos incluem Fatura Comercial, Packing List, Conhecimento de Embarque (BL/AWB), 
+            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg reveal">
+              <h3 className="text-base md:text-lg lg:text-xl font-semibold mb-2">Quais documentos são necessários para iniciar uma importação?</h3>
+              <p className="text-gray-600 text-sm md:text-base">Os principais documentos incluem Fatura Comercial, Packing List, Conhecimento de Embarque (BL/AWB), 
                 Licença de Importação (quando aplicável) e documentos específicos conforme a natureza da mercadoria.</p>
             </div>
           </div>
@@ -698,65 +670,65 @@ function App() {
       </section>
 
       {/* Links de Apoio Section */}
-      <section id="apoio" className="py-20 relative overflow-hidden">
+      <section id="apoio" className="py-16 md:py-24 relative overflow-hidden">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-12 reveal">Links de Apoio</h2>
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8 stagger-children">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 reveal">Links de Apoio</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 stagger-children">
             <a 
               href="https://portalunico.siscomex.gov.br/classif/#/sumario?origem=menu&perfil=publico"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white/80 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal"
+              className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal"
             >
               <div className="flex items-center gap-2 mb-4">
-                <ExternalLink className="h-6 w-6 text-blue-600" />
-                <h3 className="text-lg font-semibold">Consulta NCM - Receita Federal</h3>
+                <ExternalLink className="h-5 w-5 text-blue-600" />
+                <h3 className="text-base md:text-lg font-semibold">Consulta NCM - Receita Federal</h3>
               </div>
-              <p className="text-gray-600">Consulte descrições e códigos NCM no Portal Único do Siscomex.</p>
+              <p className="text-gray-600 text-sm md:text-base">Consulte descrições e códigos NCM no Portal Único do Siscomex.</p>
             </a>
             
             <a 
               href="http://www4.receita.fazenda.gov.br/simulador/"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white/80 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal"
+              className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal"
             >
               <div className="flex items-center gap-2 mb-4">
-                <ExternalLink className="h-6 w-6 text-blue-600" />
-                <h3 className="text-lg font-semibold">Simulador de Impostos</h3>
+                <ExternalLink className="h-5 w-5 text-blue-600" />
+                <h3 className="text-base md:text-lg font-semibold">Simulador de Impostos</h3>
               </div>
-              <p className="text-gray-600">Calcule uma estimativa dos impostos na importação pela Receita Federal.</p>
+              <p className="text-gray-600 text-sm md:text-base">Calcule uma estimativa dos impostos na importação pela Receita Federal.</p>
             </a>
             
             <a 
               href="https://www.gov.br/siscomex/pt-br/noticias/noticias-siscomex-importacao"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white/80 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal"
+              className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal"
             >
               <div className="flex items-center gap-2 mb-4">
-                <ExternalLink className="h-6 w-6 text-blue-600" />
-                <h3 className="text-lg font-semibold">Notícias Siscomex</h3>
+                <ExternalLink className="h-5 w-5 text-blue-600" />
+                <h3 className="text-base md:text-lg font-semibold">Notícias Siscomex</h3>
               </div>
-              <p className="text-gray-600">Acompanhe as últimas notícias e atualizações do sistema Siscomex.</p>
+              <p className="text-gray-600 text-sm md:text-base">Acompanhe as últimas notícias e atualizações do sistema Siscomex.</p>
             </a>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contato" className="py-20 relative overflow-hidden">
+      <section id="contato" className="py-16 md:py-24 relative overflow-hidden">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-12 reveal">Entre em Contato</h2>
-          <div className="max-w-xl mx-auto bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-sm transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 reveal">Entre em Contato</h2>
+          <div className="max-w-xl mx-auto bg-white/80 backdrop-blur-sm p-4 md:p-8 rounded-lg shadow-sm transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-blue-600" />
-                <span>+55 11 99417-3962</span>
+                <span className="text-sm md:text-base">+55 11 99417-3962</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-blue-600" />
-                <span>leandrobonuzzi@gmail.com</span>
+                <span className="text-sm md:text-base">leandrobonuzzi@gmail.com</span>
               </div>
             </div>
           </div>
@@ -764,35 +736,35 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-gray-900 text-white py-8 md:py-12">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-8">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <Building2 className="h-8 w-8" />
+              <Building2 className="h-6 w-6 md:h-8 md:w-8" />
               <div className="flex flex-col">
-                <span className="text-xl font-bold">Leandro Bonuzzi Servicos Administrativos</span>
-                <span className="text-sm text-gray-400">Consultor Aduaneiro – Classificador Fiscal de Mercadorias</span>
-                <span className="text-sm text-gray-400">CNPJ: 30.021.972/0001-23</span>
+                <span className="text-lg md:text-xl font-bold">Leandro Bonuzzi Servicos Administrativos</span>
+                <span className="text-xs md:text-sm text-gray-400">Consultor Aduaneiro – Classificador Fiscal de Mercadorias</span>
+                <span className="text-xs md:text-sm text-gray-400">CNPJ: 30.021.972/0001-23</span>
               </div>
             </div>
             <div className="flex space-x-4">
               <a href="#" className="hover:text-blue-400 transform transition-all duration-300 hover:scale-110">
-                <Facebook className="h-6 w-6" />
+                <Facebook className="h-5 w-5 md:h-6 md:w-6" />
               </a>
               <a href="#" className="hover:text-blue-400 transform transition-all duration-300 hover:scale-110">
-                <Instagram className="h-6 w-6" />
+                <Instagram className="h-5 w-5 md:h-6 md:w-6" />
               </a>
               <a href="#" className="hover:text-blue-400 transform transition-all duration-300 hover:scale-110">
-                <LinkedIn className="h-6 w-6" />
+                <LinkedIn className="h-5 w-5 md:h-6 md:w-6" />
               </a>
             </div>
           </div>
-          <div className="border-t border-gray-800 pt-8">
+          <div className="border-t border-gray-800 pt-6 md:pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-sm text-gray-400 mb-4 md:mb-0">
+              <p className="text-xs md:text-sm text-gray-400 mb-4 md:mb-0">
                 © 2024 Leandro Bonuzzi Servicos Administrativos. Todos os direitos reservados.
               </p>
-              <div className="flex space-x-4 text-sm text-gray-400">
+              <div className="flex space-x-4 text-xs md:text-sm text-gray-400">
                 <a href="#" className="hover:text-white transition-colors duration-300">Política de Privacidade</a>
                 <a href="#" className="hover:text-white transition-colors duration-300">Termos de Serviço</a>
               </div>
