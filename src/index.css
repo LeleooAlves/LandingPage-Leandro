@@ -25,6 +25,9 @@ body::before {
   background-position: center;
   background-repeat: no-repeat;
   z-index: -2;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
 
 body::after {
@@ -36,6 +39,15 @@ body::after {
   height: 100%;
   background-color: rgba(255, 255, 255, 0.9);
   z-index: -1;
+}
+
+/* Ajustes para dispositivos móveis */
+@media (max-width: 768px) {
+  body::before {
+    background-attachment: scroll;
+    background-size: 100% auto;
+    background-position: center top;
+  }
 }
 
 /* Smooth transition for fixed elements */
