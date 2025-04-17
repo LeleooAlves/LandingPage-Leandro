@@ -8,16 +8,26 @@ html {
 
 body {
   @apply antialiased;
-  background-image: url('/FUNDO/fundo.jpg');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
   position: relative;
   min-height: 100vh;
 }
 
 body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/imagem de fundo/fundo.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2;
+}
+
+body::after {
   content: '';
   position: fixed;
   top: 0;
