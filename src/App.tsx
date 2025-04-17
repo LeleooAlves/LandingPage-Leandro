@@ -165,7 +165,11 @@ function App() {
             WebkitPerspective: '1000',
             perspective: '1000',
             WebkitBackfaceVisibility: 'hidden',
-            backfaceVisibility: 'hidden'
+            backfaceVisibility: 'hidden',
+            backgroundSize: 'cover',
+            backgroundAttachment: 'fixed', 
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
           }}
         />
         <div className="absolute inset-0 bg-white/80 backdrop-blur-sm" />
@@ -277,12 +281,12 @@ function App() {
       </div>
 
       {/* Hero Section */}
-      <section className="pt-16 md:pt-32 pb-12 md:pb-20 px-4 relative overflow-hidden">
+      <section className="pt-32 md:pt-40 pb-12 md:pb-20 px-4 relative overflow-hidden">
         <div className="container mx-auto text-center hero-content">
-          <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold text-gray-900 mb-4 md:mb-6">
             Consultor Aduaneiro
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 md:mb-12 max-w-2xl mx-auto">
             Empresário individual na área de comércio exterior com mais de 15 anos
             de experiência no mercado, oferecendo consultoria aduaneira na área de importação, 
             com foco em classificação fiscal de mercadorias (NCM) e desenvolvimento, revisão e gerenciamento de produtos em conformidade ao novo catalogo de produtos da Receita Federal, Duimp.
