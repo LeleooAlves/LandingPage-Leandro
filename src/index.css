@@ -28,6 +28,12 @@ body::before {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
 }
 
 body::after {
@@ -45,8 +51,19 @@ body::after {
 @media (max-width: 768px) {
   body::before {
     background-attachment: scroll;
-    background-size: 100% auto;
-    background-position: center top;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  body {
+    background-color: transparent;
   }
 }
 
