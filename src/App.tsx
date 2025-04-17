@@ -412,7 +412,7 @@ function App() {
                         R$ 350,00
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
-                        03 DIAS
+                        05 DIAS
                       </td>
                     </tr>
                     <tr>
