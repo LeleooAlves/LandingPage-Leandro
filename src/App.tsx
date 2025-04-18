@@ -179,8 +179,13 @@ function App() {
     <div className="min-h-screen bg-transparent relative">
       <div className="fixed inset-0 -z-10">
         <div 
-          className="absolute inset-0 bg-[url('/background.jpg')] bg-cover bg-center bg-no-repeat bg-fixed"
+          className="absolute inset-0"
           style={{
+            backgroundImage: 'url(/background.jpg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment: 'fixed',
             WebkitBackdropFilter: 'blur(10px)',
             backdropFilter: 'blur(10px)',
             WebkitTransform: 'translate3d(0,0,0)',
@@ -188,17 +193,13 @@ function App() {
             WebkitPerspective: '1000',
             perspective: '1000',
             WebkitBackfaceVisibility: 'hidden',
-            backfaceVisibility: 'hidden',
-            backgroundSize: 'cover',
-            backgroundAttachment: 'fixed', 
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
+            backfaceVisibility: 'hidden'
           }}
         />
         <div className="absolute inset-0 bg-white/80 backdrop-blur-sm" />
       </div>
       {/* Header */}
-      <div className="header-container">
+      <div className="header-container bg-gray-200">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
