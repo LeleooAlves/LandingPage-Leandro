@@ -203,7 +203,7 @@ function App() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Building2 className="h-6 w-6 text-blue-600" />
+              <img src="/Bonuzzi.png" alt="Logo Bonuzzi" className="h-8 w-8" />
               <span className="text-lg font-bold text-gray-800">Leandro Bonuzzi</span>
             </div>
 
@@ -800,7 +800,7 @@ function App() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-8">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <Building2 className="h-6 w-6 md:h-8 md:w-8" />
+              <img src="/Bonuzzi.png" alt="Logo Bonuzzi" className="h-8 w-8" />
               <div className="flex flex-col">
                 <span className="text-lg md:text-xl font-bold">Leandro Bonuzzi Servicos Administrativos</span>
                 <span className="text-xs md:text-sm text-gray-400">Consultor Aduaneiro – Classificador Fiscal de Mercadorias</span>
