@@ -179,13 +179,9 @@ function App() {
     <div className="min-h-screen bg-transparent relative">
       <div className="fixed inset-0 -z-10">
         <div 
-          className="absolute inset-0"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
           style={{
-            backgroundImage: 'url(/background.jpg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment: 'fixed',
+            backgroundImage: 'url(https://www.nationalfreight.com.br/wp-content/uploads/2017/10/foto-multirio-02-900x450.jpg)',
             WebkitBackdropFilter: 'blur(10px)',
             backdropFilter: 'blur(10px)',
             WebkitTransform: 'translate3d(0,0,0)',
@@ -196,7 +192,7 @@ function App() {
             backfaceVisibility: 'hidden'
           }}
         />
-        <div className="absolute inset-0 bg-white/80 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-white/2 backdrop-blur-sm" />
       </div>
       {/* Header */}
       <div className="header-container bg-gray-200">
@@ -808,13 +804,20 @@ function App() {
               </div>
             </div>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-blue-400 transform transition-all duration-300 hover:scale-110">
-                <Facebook className="h-5 w-5 md:h-6 md:w-6" />
-              </a>
-              <a href="#" className="hover:text-blue-400 transform transition-all duration-300 hover:scale-110">
+              <a 
+                href="https://www.instagram.com/leandrobonuzzi?igsh=OXJsN2JkeWt6amNs" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-blue-400 transform transition-all duration-300 hover:scale-110"
+              >
                 <Instagram className="h-5 w-5 md:h-6 md:w-6" />
               </a>
-              <a href="#" className="hover:text-blue-400 transform transition-all duration-300 hover:scale-110">
+              <a 
+                href="https://www.linkedin.com/in/leandro-bonuzzi-726325162?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-blue-400 transform transition-all duration-300 hover:scale-110"
+              >
                 <LinkedIn className="h-5 w-5 md:h-6 md:w-6" />
               </a>
             </div>
