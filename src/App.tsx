@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback, FormEvent } from 'react';
-import { Building2, Phone, Mail, Facebook, Instagram, Linkedin as LinkedIn, FileText, Globe2, Clock, MessageCircle, ExternalLink, Menu, X, FileDown } from 'lucide-react';
+import { Building2, Phone, Mail, Instagram, Linkedin as LinkedIn, FileText, Globe2, Clock, MessageCircle, ExternalLink, Menu, X, FileDown } from 'lucide-react';
 
 // Configuração necessária para o react-pdf
 // pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
@@ -110,7 +110,7 @@ function App() {
   };
 
   const openNeshPdf = () => {
-    window.open('/Nesh 2022 - REGRAS INTERPRETATIVAS DO SISTEMA HARMONIZADO.pdf', '_blank');
+    setShowPdfViewer(true);
   };
 
   const handleFormSubmit = async (e: FormEvent) => {
@@ -325,37 +325,42 @@ function App() {
       <section id="servicos" className="py-16 md:py-24 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 reveal">Nossos Serviços</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 stagger-children">
-            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
-              <div className="mb-4"><FileText className="h-6 w-6 md:h-8 md:w-8 text-blue-600" /></div>
-              <h3 className="text-lg md:text-xl font-semibold mb-2">Classificação Fiscal</h3>
-              <p className="text-gray-600 mb-4 text-sm md:text-base">Análise e determinação precisa do NCM/SH para suas mercadorias, garantindo conformidade e otimização tributária.</p>
-              <div className="flex flex-col sm:flex-row gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 stagger-children">
+            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-5 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
+              <div className="mb-3"><FileText className="h-6 w-6 md:h-7 md:w-7 text-blue-600" /></div>
+              <h3 className="text-base md:text-lg font-semibold mb-2">Classificação Fiscal</h3>
+              <p className="text-gray-600 mb-3 text-xs md:text-sm">Análise e determinação precisa do NCM/SH para suas mercadorias, garantindo conformidade e otimização tributária.</p>
+              <div className="flex flex-col gap-2">
                 <button
                   onClick={() => setShowPricesPopup(true)}
-                  className="flex items-center justify-center gap-2 bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto text-sm"
+                  className="flex items-center justify-center gap-2 bg-blue-600 text-white px-2 py-1.5 rounded-lg hover:bg-blue-700 transition-colors w-full text-xs"
                 >
-                  <FileText className="h-4 w-4" />
+                  <FileText className="h-3 w-3" />
                   Preços
                 </button>
                 <button
                   onClick={() => setShowClassificationForm(true)}
-                  className="flex items-center justify-center gap-2 bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto text-sm"
+                  className="flex items-center justify-center gap-2 bg-blue-600 text-white px-2 py-1.5 rounded-lg hover:bg-blue-700 transition-colors w-full text-xs"
                 >
-                  <FileText className="h-4 w-4" />
+                  <FileText className="h-3 w-3" />
                   Solicitar Classificação
                 </button>
               </div>
             </div>
-            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
-              <div className="mb-4"><Globe2 className="h-6 w-6 md:h-8 md:w-8 text-blue-600" /></div>
-              <h3 className="text-lg md:text-xl font-semibold mb-2">Desenvolvimento, adequação e gestão</h3>
-              <p className="text-gray-600 text-sm md:text-base">Descrição de mercadorias importadas para o novo catálogo de produtos da Receita Federal, em conformidade ao novo processo de importação - (Duimp).</p>
+            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-5 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
+              <div className="mb-3"><Globe2 className="h-6 w-6 md:h-7 md:w-7 text-blue-600" /></div>
+              <h3 className="text-base md:text-lg font-semibold mb-2">Desenvolvimento, adequação e gestão</h3>
+              <p className="text-gray-600 text-xs md:text-sm">Descrição de mercadorias importadas para o novo catálogo de produtos da Receita Federal, em conformidade ao novo processo de importação - (Duimp).</p>
             </div>
-            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
-              <div className="mb-4"><Clock className="h-6 w-6 md:h-8 md:w-8 text-blue-600" /></div>
-              <h3 className="text-lg md:text-xl font-semibold mb-2">Consultoria em Importação</h3>
-              <p className="text-gray-600 text-sm md:text-base">Orientação especializada em processos de importação, análise de custos e viabilidade operacional.</p>
+            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-5 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
+              <div className="mb-3"><Clock className="h-6 w-6 md:h-7 md:w-7 text-blue-600" /></div>
+              <h3 className="text-base md:text-lg font-semibold mb-2">Consultoria em Importação</h3>
+              <p className="text-gray-600 text-xs md:text-sm">Orientação especializada em processos de importação, análise de custos e viabilidade operacional.</p>
+            </div>
+            <div className="bg-white/80 backdrop-blur-sm p-4 md:p-5 rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
+              <div className="mb-3"><Building2 className="h-6 w-6 md:h-7 md:w-7 text-blue-600" /></div>
+              <h3 className="text-base md:text-lg font-semibold mb-2">Critério 15 OEA - Revisão de banco de dados</h3>
+              <p className="text-gray-600 text-xs md:text-sm">Auditoria e revisão completa do banco de dados de produtos para atendimento ao critério 15 do programa OEA (Operador Econômico Autorizado), garantindo conformidade regulatória.</p>
             </div>
           </div>
         </div>
@@ -851,9 +856,10 @@ function App() {
             </div>
             <div className="flex-1 p-4">
               <iframe
-                src="/PDF/Nesh 2022 - REGRAS INTERPRETATIVAS DO SISTEMA HARMONIZADO.pdf"
-                className="w-full h-full"
+                src="https://drive.google.com/file/d/1eNj-tQIG6b5XY7cGLhBLLCGKJX_RwcP4/preview"
+                className="w-full h-full border-0"
                 title="REGRAS INTERPRETATIVAS DO SISTEMA HARMONIZADO"
+                allowFullScreen
               />
             </div>
           </div>
